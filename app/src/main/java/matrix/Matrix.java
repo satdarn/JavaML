@@ -36,7 +36,7 @@ public class Matrix {
      * @param columns an int for the number of columns in the matrix
      */
     public Matrix(double[][] matrix, int rows, int columns){
-        if((matrix.length != rows) || (matrix.length != columns)){
+        if((matrix.length != rows) || (matrix[0].length != columns)){
             throw new IllegalArgumentException(
                     "Invalid number of rows or columns");
         }
