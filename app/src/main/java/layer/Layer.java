@@ -1,5 +1,6 @@
-package src;
+package layer;
 
+import vector.Vector;
 /**
  * This class is an abstract implementation of a layer in a network,
  * it has a number of input nodes and a number of output nodes as well as a 
