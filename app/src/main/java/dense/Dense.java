@@ -26,6 +26,22 @@ public class Dense extends Layer {
         this.weights = new Matrix(outputSize, inputSize, min, max);
         this.bias = new Vector(outputSize);
     }
+
+    public void setWeights(Matrix weights) {
+        this.weights = weights;
+    }
+
+    public void setBias(Vector bias){
+        this.bias = bias;
+    }
+
+    public Matrix getWeights(){
+        return this.weights;
+    }
+
+    public Vector getBias(){
+        return this.bias;
+    }
     
     /**
      * The forward propagation through the layer.
