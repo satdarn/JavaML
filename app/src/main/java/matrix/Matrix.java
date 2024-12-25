@@ -201,6 +201,20 @@ public class Matrix {
     }
 
     /**
+     * Sets the matrix to the given matrix
+     * @param matrix the new matrix
+     */
+    public void setMatrix(double[][] matrix){
+        if(isNull(matrix)){
+            throw new IllegalArgumentException(
+                    "Matrix cannot be null");
+        }
+        this.matrix = matrix;
+        this.numberOfRows = matrix.length;
+        this.numberOfColumns = matrix[0].length;
+    } 
+
+    /**
      * Returns the given row and returns it as an array
      * @param row an int with the row to return
      * @return an array of doubles representing the row
