@@ -27,6 +27,9 @@ public abstract class Layer{
      * @param outputSize number of output nodes
      */
     public Layer(int inputSize, int outputSize){
+        if(inputSize == 0 || outputSize == 0){
+            throw new IllegalArgumentException("Input and output sizes must be greater than 0.");
+        }
         this.inputSize = inputSize;
         this.outputSize = outputSize;
     }
