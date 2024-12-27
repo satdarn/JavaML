@@ -48,9 +48,20 @@ public class Vector extends Matrix {
         super(length, 1);
     }
 
+    /**
+     * Gets the value at the given index
+     * @param row given index
+     * @return the value at the index
+     */
     public double get(int row){
         return this.get(row, 1);
     }
+
+    /**
+     * Sets the value at a given index to a given value
+     * @param row the given index
+     * @param value the given value
+     */
     public void set(int row, double value){
         this.set(row, 1, value);
     }
