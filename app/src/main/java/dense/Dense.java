@@ -32,6 +32,16 @@ public class Dense extends Layer {
         this.setWeights(weights);
         this.setBias(bias);
     }
+    
+    /**
+     * Creates a dense layer with a matrix of given weights and bias
+     * @param weights the weights matrix
+     * @param bias the bias vector
+     */
+    public Dense(Matrix weights, Vector bias){
+        this(weights.getRows(), weights.getColumns(), weights, bias);
+    }
+
     public void setWeights(Matrix weights) {
         if(weights.getRows() != this.getOutputSize() || 
             weights.getColumns() != this.getInputSize()){
