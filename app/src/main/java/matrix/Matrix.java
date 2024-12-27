@@ -196,7 +196,7 @@ public class Matrix {
      * Returns a 2d array representing the matrix
      * @return a 2d array of doubles representing the matrix
      */
-    public double[][] getMatrix() {
+    public double[][] get() {
         return this.matrix;
     }
 
@@ -204,7 +204,7 @@ public class Matrix {
      * Sets the matrix to the given matrix
      * @param matrix the new matrix
      */
-    public void setMatrix(double[][] matrix){
+    public void set(double[][] matrix){
         if(isNull(matrix)){
             throw new IllegalArgumentException(
                     "Matrix cannot be null");
@@ -273,7 +273,7 @@ public class Matrix {
      * @param value the new value to set
      */
     public void set(int row, int column, double value){
-        if((row >= 0 && row < this.numberOfRows) && 
+        if((row >= 0 && row < this.numberOfRows) &&     
                 (column >= 0 && column < this.numberOfColumns)){
             this.matrix[row][column] = value;
         } 
