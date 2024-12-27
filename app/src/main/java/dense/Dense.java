@@ -28,10 +28,17 @@ public class Dense extends Layer {
     }
 
     public void setWeights(Matrix weights) {
+        if(weights.getRows() != this.getOutputSize() || 
+            weights.getColumns() != this.getInputSize()){
+            throw new IllegalArgumentException("Invalid weights dimensions");
+        }
         this.weights = weights;
     }
 
     public void setBias(Vector bias){
+        if(bias.getRows() != this.getOutputSize()){
+            throw new IllegalArgumentException("Invalid biases length");
+        }
         this.bias = bias;
     }
 
@@ -49,6 +56,9 @@ public class Dense extends Layer {
      * @return the result of the forward propagation.
      */
     public Vector forwardProp(Vector input) {
+        if(input.getRows() != this.getInputSize()){
+            throw new IllegalArgumentException("Invalid input dimensions");
+        }
         // Store the input vector for use in backpropagation.
         this.inputVector = input;
 
@@ -68,6 +78,9 @@ public class Dense extends Layer {
      * @return the gradient of the input with respect to the loss function.
      */
     public Vector backProp(Vector outputGrad) {
+        if(outputGrad.getRows() != this.getOutputSize()){
+            throw new IllegalArgumentException("Invaild output gradient dimension");
+        }
         // Compute the gradient of the weights (dW = dL/dY * X^T).
         Matrix weightsGrad = Matrix.multiply(outputGrad, this.inputVector.T());
 
