@@ -3,6 +3,13 @@ import layer.Layer;
 import matrix.Matrix;
 import vector.Vector;
 
+/**
+ * This class is an implementation of a dense layer in a network,
+ * it has a number of input nodes and a number of output nodes as well as a 
+ * function that propegates forward and backwards
+ * 
+ * @author Joseph Bronsten
+ */
 public class Dense extends Layer {
 
     private Matrix weights;
@@ -27,6 +34,14 @@ public class Dense extends Layer {
         this.bias = new Vector(outputSize);
     }
 
+    /**
+     * Creates a dense layer with the input and output sizes, and a matrix of 
+     * given weights and a bias vector
+     * @param inputSize the size of the input vector
+     * @param outputSize the size of the output vector
+     * @param weights the given weights
+     * @param bias the given bias
+     */
     public Dense(int inputSize, int outputSize, Matrix weights, Vector bias){
         super(inputSize, outputSize);
         this.setWeights(weights);
@@ -42,6 +57,10 @@ public class Dense extends Layer {
         this(weights.getRows(), weights.getColumns(), weights, bias);
     }
 
+    /**
+     * Sets the weight matrix of the dense layer to a given matrix
+     * @param weights the given weights matrix
+     */
     public void setWeights(Matrix weights) {
         if(weights.getRows() != this.getOutputSize() || 
             weights.getColumns() != this.getInputSize()){
@@ -50,6 +69,10 @@ public class Dense extends Layer {
         this.weights = weights;
     }
 
+    /**
+     * Sets the bias vector of the dense layer to a given vector
+     * @param bias the given bias vector
+     */
     public void setBias(Vector bias){
         if(bias.getRows() != this.getOutputSize()){
             throw new IllegalArgumentException("Invalid biases length");
@@ -57,10 +80,18 @@ public class Dense extends Layer {
         this.bias = bias;
     }
 
+    /**
+     * Returns the weights of the dense layer
+     * @return the weights of the dense layer
+     */
     public Matrix getWeights(){
         return this.weights;
     }
 
+    /**
+     * Returns the bias of the dense layer
+     * @return the bias of the dense layer
+     */
     public Vector getBias(){
         return this.bias;
     }
