@@ -312,7 +312,7 @@ public class Matrix {
      * @return the transpose of the matrix
      */
     public static Matrix transpose(Matrix matrix){
-        double[][] result = transpose(matrix.getMatrix());
+        double[][] result = transpose(matrix.get());
         return new Matrix(result);
     }
 
@@ -329,14 +329,14 @@ public class Matrix {
     public static double[][] multiply(double[][] matrixA, double[][] matrixB) {
         // Check if matrices are valid for multiplication
         multiplyCheck(matrixA, matrixB);
-    
+
         int rows = matrixA.length;
         int columns = matrixB[0].length;
         int commonDim = matrixA[0].length;
-    
+
         // Initialize the result matrix
         double[][] result = new double[rows][columns];
-    
+
         // Perform matrix multiplication
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -345,7 +345,7 @@ public class Matrix {
                 }
             }
         }
-    
+
         return result;
     }
 
@@ -399,7 +399,7 @@ public class Matrix {
         // Check the size of the matrices and make sure they are the same size
         addCheck(matrixA, matrixB);
 
-        double[][] result = add(matrixA.getMatrix(), matrixB.getMatrix());
+        double[][] result = add(matrixA.get(), matrixB.get());
         return new Matrix(result);
     }
 
@@ -439,7 +439,7 @@ public class Matrix {
         // Check the size of the matrix and make sure theh are of the same size
         addCheck(matrixA, matrixB);
         
-        double[][] result = subtract(matrixA.getMatrix(), matrixB.getMatrix());
+        double[][] result = subtract(matrixA.get(), matrixB.get());
         return new Matrix(result);
     }
 
@@ -463,10 +463,10 @@ public class Matrix {
      * @return scaled matrix
      */
     public static Matrix scale(Matrix matrix, double scaler){
-        if(isNull(matrix.getMatrix())){
+        if(isNull(matrix.get())){
             return null;
         }
-        double[][] result = scale(matrix.getMatrix(), scaler);
+        double[][] result = scale(matrix.get(), scaler);
         return new Matrix(result);
     }
     
@@ -533,7 +533,7 @@ public class Matrix {
      */
     public static Matrix convolution(Matrix matrix, Matrix kernel){
         return new Matrix(
-            convolution(matrix.getMatrix(), kernel.getMatrix()));
+            convolution(matrix.get(), kernel.get()));
     }
 
     public double[][] convolution(double[][] kernal){
@@ -541,7 +541,7 @@ public class Matrix {
     }
 
     public Matrix convolution(Matrix kernal){
-        return new Matrix(convolution(this.matrix, kernal.getMatrix()));
+        return new Matrix(convolution(this.matrix, kernal.get()));
     }
 }
 
