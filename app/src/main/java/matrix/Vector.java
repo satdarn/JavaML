@@ -54,7 +54,7 @@ public class Vector extends Matrix {
      * @return the value at the index
      */
     public double get(int row){
-        return this.get(row, 1);
+        return this.get(row, 0);
     }
 
     /**
@@ -63,7 +63,7 @@ public class Vector extends Matrix {
      * @param value the given value
      */
     public void set(int row, double value){
-        this.set(row, 1, value);
+        this.set(row, 0, value);
     }
     /**
      * Returns if every entry in the vector has a value of zero
@@ -76,6 +76,14 @@ public class Vector extends Matrix {
             }
         }
         return true;
+    }
+
+    public double[] toArray() {
+        double[] array = new double[this.get().length];
+        for(int i = 0; i < array.length; i++) {
+            array[i] = this.get(i);
+        }
+        return array;
     }
 
     /**
@@ -118,7 +126,7 @@ public class Vector extends Matrix {
         double[][] scaled = scale(vector.get(), scaler);
         return new Vector(scaled);
     }
-    
+
     public static Vector add(Vector vector1, Vector vector2){
         double[][] sum = add(vector1.get(), vector2.get());
         return new Vector(sum);
@@ -138,5 +146,9 @@ public class Vector extends Matrix {
         return new Vector(product);
     }
 
+    public static Vector elementWiseMultiply(Vector vector1, Vector vector2){
+        double[][] product = elementWiseMultiply(vector1.get(), vector2.get());
+        return new Vector(product);
+    }
 }
 
