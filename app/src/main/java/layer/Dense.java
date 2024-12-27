@@ -145,18 +145,16 @@ public class Dense extends Layer {
         }
         // Compute the gradient of the weights (dW = dL/dY * X^T).
         Matrix weightsGrad = Matrix.multiply(outputGrad, this.inputVector.T());
-        System.out.println(weightsGrad.toString());
+        
 
         // Scale the weights gradient by the learning rate.
         weightsGrad.scale(super.getLearningRate());
-        System.out.println(weightsGrad.toString());
 
         // Scale the output gradient by the learning rate for bias adjustment.
         outputGrad.scale(super.getLearningRate());
 
         // Update the weights by subtracting the scaled gradient (W = W - dW).
         this.weights = Matrix.subtract(this.weights, weightsGrad);
-        System.out.println(this.weights.toString());
 
         // Update the bias by subtracting the scaled output gradient (b = b - dL/dY).
         this.bias = Vector.subtract(this.bias, outputGrad);
