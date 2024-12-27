@@ -84,10 +84,8 @@ public class ScaleTest {
     public void testScaleWithNullMatrix() {
         double[][] matrix = null;
         double scaler = 2.0;
-
-        double[][] result = Matrix.scale(matrix, scaler);
-
-        assertNull(result, "Scaling a null matrix should return null");
+        
+        assertThrows(NullPointerException.class,() -> {Matrix.scale(matrix, scaler);});
     }
 
     // Test for scaling a Matrix object with a scalar of 0 (should result in a matrix of zeros)
