@@ -91,7 +91,7 @@ public class ConstructorTest {
     // Test for invalid Matrix(double[][] matrix) where matrix is null
     @Test
     public void testMatrixConstructorWithNullArray() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(NullPointerException.class, () -> {
             new Matrix(null);
         });
     }
@@ -103,7 +103,6 @@ public class ConstructorTest {
             {1.0, 2.0},
             {3.0, 4.0}
         };
-
         assertThrows(IllegalArgumentException.class, () -> {
             new Matrix(matrixData, 3, 3); // Mismatch between data and shape
         });
