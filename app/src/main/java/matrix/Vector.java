@@ -113,5 +113,30 @@ public class Vector extends Matrix {
             vector2.get());
         return result;
     }
+
+    public static Vector scale(Vector vector, double scaler){
+        double[][] scaled = scale(vector.get(), scaler);
+        return new Vector(scaled);
+    }
+    
+    public static Vector add(Vector vector1, Vector vector2){
+        double[][] sum = add(vector1.get(), vector2.get());
+        return new Vector(sum);
+    }
+
+    public static Vector subtract(Vector vector1, Vector vector2){
+        double[][] difference = subtract(vector1.get(), vector2.get());
+        return new Vector(difference);
+    }
+
+    public static Vector multiply(Matrix matrix, Vector vector){
+        double[][] product = multiply(matrix.get(), vector.get());
+        if(product[0].length != 1){
+            throw new IllegalArgumentException(
+                    "Matrix and vector dimensions do not match for multiplication");
+        }
+        return new Vector(product);
+    }
+
 }
 
