@@ -1,6 +1,6 @@
 package layer;
 
-import vector.Vector;
+import matrix.Vector;
 /**
  * This class is an abstract implementation of a layer in a network,
  * it has a number of input nodes and a number of output nodes as well as a 

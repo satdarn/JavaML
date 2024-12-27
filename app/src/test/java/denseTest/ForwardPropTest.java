@@ -1,9 +1,10 @@
 package denseTest;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import vector.Vector;
+
+import layer.Dense;
 import matrix.Matrix;
-import dense.Dense;
+import matrix.Vector;
 public class ForwardPropTest {
 
     // Custom assertion for matrix equality

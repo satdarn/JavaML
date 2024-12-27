@@ -1,7 +1,6 @@
-package dense;
-import layer.Layer;
+package layer;
 import matrix.Matrix;
-import vector.Vector;
+import matrix.Vector;
 
 /**
  * This class is an implementation of a dense layer in a network,

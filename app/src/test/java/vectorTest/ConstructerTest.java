@@ -3,7 +3,7 @@ package vectorTest;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import vector.Vector;
+import matrix.Vector;
 
 public class ConstructerTest {
     // Test for Vector(double[] vector) - Create a column vector from an array

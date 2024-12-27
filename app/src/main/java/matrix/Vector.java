@@ -1,6 +1,5 @@
-package vector;
+package matrix;
 
-import matrix.Matrix;
 /**
  * This class implements a column vector as a Matrix of size n and 1, and allows
  * the dot product of two vectors to be computed 

@@ -3,9 +3,9 @@ package denseTest;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import dense.Dense;
+import layer.Dense;
 import matrix.Matrix;
-import vector.Vector;
+import matrix.Vector;
 
 public class ConstructorTest {
     // Test for Dense(int inputSize, int outputSize) - Valid sizes

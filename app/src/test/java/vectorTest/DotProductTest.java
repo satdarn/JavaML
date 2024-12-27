@@ -3,7 +3,7 @@ package vectorTest;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import vector.Vector;
+import matrix.Vector;
 
 public class DotProductTest {
     // Test for dotProduct(double[][], double[][]) - Valid input
