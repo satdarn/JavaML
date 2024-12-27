@@ -21,14 +21,29 @@ public abstract class Activation extends Layer{
     }
 
     /**
+     * A helper function that throws an error if the passed object is null
+     * @param obj the object to check
+     * @param msg the error message
+     */
+    private static void handleNull(Object obj, String msg){
+        if(obj == null){
+            throw new NullPointerException(msg);
+        }
+    }
+
+    /**
      * The forward propegation through the layer
      * @param input the input to the forward prop
      * @return the result of the forward prop
      */
     public Vector forwardProp(Vector input){
+        handleNull(input, "Input cannot be null");
+        if(input.getRows() != this.getInputSize()){
+            throw new IllegalArgumentException("Input size mismatch");
+        }
         setInputVector(input);
-        for(int index = 0; index < input.getRows(); index++){
-            double value = input.get(index);
+        for(int index = 0; index <  input.toArray().length; index++){
+            double value = getInputVector().get(index);
             value = activationFunc(value);
             input.set(index, value);
         }
@@ -41,13 +56,17 @@ public abstract class Activation extends Layer{
      * @return the gradient of the input layer
      */
     public Vector backProp(Vector outputGrad){
+        handleNull(outputGrad, "Output gradient cannot be null");
+        if(outputGrad.getRows() != this.getInputSize()){
+            throw new IllegalArgumentException("Output gradient size mismatch");
+        }
         Vector inputGrad = new Vector(getInputVector().getRows(), 0);
         for(int index = 0; index < getInputVector().getRows(); index++){
             double value = getInputVector().get(index);
             value = activationPrime(value);
             inputGrad.set(index, value);
         }
-        inputGrad = (Vector) Matrix.multiply(outputGrad, inputGrad);
+        inputGrad = Vector.elementWiseMultiply(outputGrad, inputGrad);
         return inputGrad;
     }
     /**
