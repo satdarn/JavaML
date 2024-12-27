@@ -14,11 +14,8 @@ public class Vector extends Matrix {
      * @param vector the array of doubles that becomes the column vector
      */
     public Vector(double[] vector) {
-        super(new double[][]{vector});
-        if(vector.length == 0){
-            throw new IllegalArgumentException(
-                "Vectors must have a size greater than 0");
-        }
+        this(new double[][]{{0}});
+        
         double[][] column_vector = new double[vector.length][1];
 
         for(int i = 0; i < vector.length; i++) {
@@ -34,10 +31,6 @@ public class Vector extends Matrix {
      */
     public Vector(double[][] vector){
         super(vector, vector.length, 1);
-        if(vector[0].length != 1){
-            throw new IllegalArgumentException(
-                "Vectors must have a size of nx1");
-        }
     }
     /**
      * Creates a vector of a given length with each entry with a given value
