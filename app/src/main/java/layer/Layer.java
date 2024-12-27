@@ -21,6 +21,7 @@ public abstract class Layer{
         this.inputSize = 0;
         this.outputSize = 0;
     }
+
     /**
      * Creates a layer with a given input size and given output size
      * @param inputSize number of input nodes
@@ -33,6 +34,7 @@ public abstract class Layer{
         this.inputSize = inputSize;
         this.outputSize = outputSize;
     }
+
     /**
      * Returns the number of input features
      * @return the number of input features
@@ -64,6 +66,7 @@ public abstract class Layer{
     public static void setLearningRate(double rate){
         learningRate = rate;
     }
+    
     /**
      * The forward propegation through the layer
      * @param input the input to the forward prop
