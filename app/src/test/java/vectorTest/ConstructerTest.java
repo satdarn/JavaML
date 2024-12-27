@@ -14,7 +14,7 @@ public class ConstructerTest {
 
         assertEquals(3, vector.getRows()); // Check the number of rows
         assertEquals(1, vector.getColumns()); // Check the number of columns
-        double[][] matrix = vector.getMatrix();
+        double[][] matrix = vector.get();
         for (int i = 0; i < input.length; i++) {
             assertEquals(input[i], matrix[i][0]); // Check each element
         }
@@ -28,7 +28,7 @@ public class ConstructerTest {
 
         assertEquals(3, vector.getRows()); // Check the number of rows
         assertEquals(1, vector.getColumns()); // Check the number of columns
-        double[][] matrix = vector.getMatrix();
+        double[][] matrix = vector.get();
         for (int i = 0; i < input.length; i++) {
             assertEquals(input[i][0], matrix[i][0]); // Check each element
         }
@@ -50,7 +50,7 @@ public class ConstructerTest {
 
         assertEquals(length, vector.getRows()); // Check the number of rows
         assertEquals(1, vector.getColumns()); // Check the number of columns
-        double[][] matrix = vector.getMatrix();
+        double[][] matrix = vector.get();
         for (int i = 0; i < length; i++) {
             assertEquals(value, matrix[i][0]); // Check each element
         }

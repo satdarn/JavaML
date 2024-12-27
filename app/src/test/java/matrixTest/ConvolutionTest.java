@@ -48,7 +48,7 @@ public class ConvolutionTest {
 
         Matrix result = Matrix.convolution(matrix, kernel);
 
-        assertArrayEquals(expected.getMatrix(), result.getMatrix(), "Cross-correlation with Matrix object failed");
+        assertArrayEquals(expected.get(), result.get(), "Cross-correlation with Matrix object failed");
     }
 
     // Test for cross-correlation with Matrix instance and kernel (using instance method)
@@ -70,7 +70,7 @@ public class ConvolutionTest {
 
         Matrix result = matrix.convolution(kernel);
 
-        assertArrayEquals(expected.getMatrix(), result.getMatrix(), "Instance cross-correlation with Matrix object failed");
+        assertArrayEquals(expected.get(), result.get(), "Instance cross-correlation with Matrix object failed");
     }
 
     // Test for cross-correlation with mismatched dimensions (should throw an exception or return null)
@@ -193,7 +193,7 @@ public class ConvolutionTest {
 
         Matrix result = matrix.convolution(kernel);
 
-        assertArrayEquals(expected.getMatrix(), result.getMatrix(), "Cross-correlation with zero kernel failed");
+        assertArrayEquals(expected.get(), result.get(), "Cross-correlation with zero kernel failed");
     }
 
     // Test for cross-correlation with mismatched dimensions in Matrix objects

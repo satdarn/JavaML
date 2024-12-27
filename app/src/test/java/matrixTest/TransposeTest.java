@@ -18,7 +18,7 @@ public class TransposeTest {
             {2, 4, 6}
         });
         Matrix result1 = matrix1.T();
-        assertArrayEquals(expectedResult1.getMatrix(), result1.getMatrix(), "Transposition test 1 failed");
+        assertArrayEquals(expectedResult1.get(), result1.get(), "Transposition test 1 failed");
     }
 
     @Test
@@ -27,7 +27,7 @@ public class TransposeTest {
         Matrix matrix2 = new Matrix(new double[10][20]);
         Matrix expectedResult2 = new Matrix(new double[20][10]);
         Matrix result2 = matrix2.T();
-        assertArrayEquals(expectedResult2.getMatrix(), result2.getMatrix(), "Transposition test 2 failed");
+        assertArrayEquals(expectedResult2.get(), result2.get(), "Transposition test 2 failed");
     }
 
     @Test

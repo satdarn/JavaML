@@ -46,7 +46,7 @@ public class AddSubTest {
 
         Matrix result = Matrix.add(matrixA, matrixB);
 
-        assertArrayEquals(expected.getMatrix(), result.getMatrix(), "Matrix addition with Matrix objects failed");
+        assertArrayEquals(expected.get(), result.get(), "Matrix addition with Matrix objects failed");
     }
 
     // Test for adding incompatible matrices (should throw an exception)
@@ -105,7 +105,7 @@ public class AddSubTest {
 
         Matrix result = Matrix.subtract(matrixA, matrixB);
 
-        assertArrayEquals(expected.getMatrix(), result.getMatrix(), "Matrix subtraction with Matrix objects failed");
+        assertArrayEquals(expected.get(), result.get(), "Matrix subtraction with Matrix objects failed");
     }
 
     // Test for subtracting incompatible matrices (should throw an exception)

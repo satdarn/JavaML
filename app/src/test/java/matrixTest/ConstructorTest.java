@@ -22,7 +22,7 @@ public class ConstructorTest {
         
         assertEquals(2, matrix.getRows());
         assertEquals(2, matrix.getColumns());
-        assertArrayEquals(matrixData, matrix.getMatrix());
+        assertArrayEquals(matrixData, matrix.get());
     }
 
     // Test for Matrix(double[][] matrix, int rows, int columns)
@@ -36,7 +36,7 @@ public class ConstructorTest {
 
         assertEquals(2, matrix.getRows());
         assertEquals(2, matrix.getColumns());
-        assertArrayEquals(matrixData, matrix.getMatrix());
+        assertArrayEquals(matrixData, matrix.get());
     }
 
     // Test for Matrix(int rows, int columns) - creates a matrix of zeros
@@ -46,10 +46,10 @@ public class ConstructorTest {
 
         assertEquals(2, matrix.getRows());
         assertEquals(3, matrix.getColumns());
-        assertNotNull(matrix.getMatrix());
+        assertNotNull(matrix.get());
         for (int i = 0; i < matrix.getRows(); i++) {
             for (int j = 0; j < matrix.getColumns(); j++) {
-                assertEquals(0, matrix.getMatrix()[i][j]);
+                assertEquals(0, matrix.get()[i][j]);
             }
         }
     }
@@ -61,10 +61,10 @@ public class ConstructorTest {
 
         assertEquals(2, matrix.getRows());
         assertEquals(2, matrix.getColumns());
-        assertNotNull(matrix.getMatrix());
+        assertNotNull(matrix.get());
         for (int i = 0; i < matrix.getRows(); i++) {
             for (int j = 0; j < matrix.getColumns(); j++) {
-                assertEquals(5.0, matrix.getMatrix()[i][j]);
+                assertEquals(5.0, matrix.get()[i][j]);
             }
         }
     }
@@ -76,12 +76,12 @@ public class ConstructorTest {
 
         assertEquals(2, matrix.getRows());
         assertEquals(2, matrix.getColumns());
-        assertNotNull(matrix.getMatrix());
+        assertNotNull(matrix.get());
 
         // Check that all values are within the given range
         for (int i = 0; i < matrix.getRows(); i++) {
             for (int j = 0; j < matrix.getColumns(); j++) {
-                double value = matrix.getMatrix()[i][j];
+                double value = matrix.get()[i][j];
                 assertTrue(value >= 1.0 && value <= 10.0, 
                         "Value " + value + " is out of the specified range.");
             }

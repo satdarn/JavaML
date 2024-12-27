@@ -46,7 +46,7 @@ public class MuliplicationTest {
 
         Matrix result = Matrix.multiply(matrixA, matrixB);
 
-        assertArrayEquals(expected.getMatrix(), result.getMatrix(), "Matrix multiplication with Matrix objects failed");
+        assertArrayEquals(expected.get(), result.get(), "Matrix multiplication with Matrix objects failed");
     }
 
     // Test for multiplying incompatible matrices (should throw an exception)
