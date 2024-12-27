@@ -13,22 +13,6 @@ public class Matrix {
     private int numberOfColumns;
 
     /**
-     * Create a new matrix object given a 2d array of doubles
-     * @param matrix a 2d array of doubles
-     * @throws IllegalArgumentException if the matrix is null
-     */
-    public Matrix(double[][] matrix) {
-        if(isNull(matrix)){
-            throw new IllegalArgumentException(
-                    "Matrix cannot be null");
-        }
-        this.matrix = matrix;
-        this.numberOfRows = matrix.length;
-        this.numberOfColumns = matrix[0].length;
-
-    }
-
-    /**
      * Creates a new matrix object given a 2d array of doubles and the shape of
      * the matrix
      * @param matrix a 2d array of doubles
@@ -36,16 +20,32 @@ public class Matrix {
      * @param columns an int for the number of columns in the matrix
      */
     public Matrix(double[][] matrix, int rows, int columns){
+        handleNull(matrix, "Matrix cannot be null");
+        if(rows == 0 || columns == 0){
+            throw new IllegalArgumentException(
+                    "Matrix rows or columns cannot be of size 0");
+        }
         if((matrix.length != rows) || (matrix[0].length != columns)){
             throw new IllegalArgumentException(
                     "Invalid number of rows or columns");
         }
-        else {
-            this.matrix = matrix;
-            this.numberOfRows = rows;
-            this.numberOfColumns = columns;
-        }
+
+        this.matrix = matrix;
+        this.numberOfRows = rows;
+        this.numberOfColumns = columns;
+
     }
+
+    /**
+     * Create a new matrix object given a 2d array of doubles
+     * @param matrix a 2d array of doubles
+     * @throws IllegalArgumentException if the matrix is null
+     */
+    public Matrix(double[][] matrix) {
+        this(matrix, matrix.length, matrix[0].length);
+    }
+
+    
 
     /**
      * Create a new matrix object with a 2d array of zeros with the given shape
@@ -53,13 +53,7 @@ public class Matrix {
      * @param columns an int for the number of columns in the matrix
      */
     public Matrix(int rows, int columns){
-        if(rows == 0 || columns == 0){
-            throw new IllegalArgumentException(
-                    "Rows and columns cannot both be zero");
-        }
-        this.matrix = new double[rows][columns];
-        this.numberOfRows = rows;
-        this.numberOfColumns = columns;
+        this(new double[rows][columns], rows, columns);
     }
 
     /**
@@ -70,11 +64,7 @@ public class Matrix {
      * @param value a double which each index of the matrix is set to
      */
     public Matrix(int rows, int columns, double value){
-        if(rows == 0 || columns == 0){
-            throw new IllegalArgumentException(
-                    "Rows and columns cannot both be zero");
-        }
-        this.matrix = new double[rows][columns];
+        this(new double[rows][columns], rows, columns);
         for(int i = 0; i < rows; i++){
             for(int j = 0; j < columns; j++){
                 this.matrix[i][j] = value;
@@ -93,13 +83,11 @@ public class Matrix {
      * @param max the maximum value of the uniform distribution
      */
     public Matrix(int rows, int columns, double min, double max) {
-        this.numberOfRows = rows;
-        this.numberOfColumns = columns;
+        this(new double[rows][columns], rows, columns);
         if (min >= max) {
             throw new IllegalArgumentException("Min must be less than Max.");
         }
-        this.matrix = new double[rows][columns];
-
+        
         for (int i = 0; i < numberOfRows; i++) {
             for (int j = 0; j < numberOfColumns; j++) {
                 this.matrix[i][j] = min + (max - min) * Math.random();
