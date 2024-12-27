@@ -326,27 +326,26 @@ public class Matrix {
      * @param matrixB the second matrix in the multiplication
      * @return the product of both matrices
      */
-    public static double[][] multiply(double[][] matrixA, double[][] matrixB){
-        // Return null if either matrix is null
-        if(isNull(matrixA, matrixB)){
-            return null;
-        }
-        // Check the size of the matrices and make sure they are 
-        // compatible for multiplication
+    public static double[][] multiply(double[][] matrixA, double[][] matrixB) {
+        // Check if matrices are valid for multiplication
         multiplyCheck(matrixA, matrixB);
-
+    
+        int rows = matrixA.length;
+        int columns = matrixB[0].length;
+        int commonDim = matrixA[0].length;
+    
         // Initialize the result matrix
-        double[][] result = new double[matrixA.length][matrixB[0].length];
-
-        // Perform the matrix multiplication
-        for(int i = 0; i < matrixA.length; i++){
-            for(int j = 0; j < matrixB[0].length; j++){
-                for(int k = 0; k < matrixB.length; k++){
+        double[][] result = new double[rows][columns];
+    
+        // Perform matrix multiplication
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                for (int k = 0; k < commonDim; k++) {
                     result[i][j] += matrixA[i][k] * matrixB[k][j];
                 }
             }
         }
-
+    
         return result;
     }
 
@@ -354,15 +353,10 @@ public class Matrix {
      * Returns the product of the two matrices
      * @param matrixA the first matrix in the multiplication
      * @param matrixB the second matrix in the multiplication
-     * @return the product of both matrices
+     * @return the product of both matrices as a Matrix object
      */
-    public static Matrix multiply(Matrix matrixA, Matrix matrixB){
-        // Check the size of the matrices and make sure they are 
-        // compatible for multiplication
-        multiplyCheck(matrixA, matrixB);
-
-        // Initialize the result matrix
-        double[][] result = multiply(matrixA.getMatrix(), matrixB.getMatrix());
+    public static Matrix multiply(Matrix matrixA, Matrix matrixB) {
+        double[][] result = multiply(matrixA.get(), matrixB.get());
         return new Matrix(result);
     }
 
