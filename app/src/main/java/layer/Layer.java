@@ -11,6 +11,7 @@ import matrix.Vector;
 public abstract class Layer{
     private int inputSize;
     private int outputSize;
+    private Vector inputVector; 
 
     private static double learningRate;
 
@@ -66,7 +67,14 @@ public abstract class Layer{
     public static void setLearningRate(double rate){
         learningRate = rate;
     }
+
+    public void setInputVector(Vector vector) {
+        this.inputVector = vector;  
+    }
     
+    public Vector getInputVector(){
+        return this.inputVector;
+    }
     /**
      * The forward propegation through the layer
      * @param input the input to the forward prop
