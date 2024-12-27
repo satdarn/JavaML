@@ -517,5 +517,16 @@ public class Matrix {
         handleNull(kernal, "Matrices and kernel cannot be null for convolution");
         return new Matrix(convolution(this.matrix, kernal.get()));
     }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (double[] row : matrix) {
+            for (double value : row) {
+                sb.append(String.format("%.4f ", value));
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 }
 
