@@ -62,6 +62,7 @@ public class Dense extends Layer {
      * @param weights the given weights matrix
      */
     public void setWeights(Matrix weights) {
+        handleNull(weights, "Weights matrix cannot be null");
         if(weights.getRows() != this.getOutputSize() || 
             weights.getColumns() != this.getInputSize()){
             throw new IllegalArgumentException("Invalid weights dimensions");
@@ -74,6 +75,7 @@ public class Dense extends Layer {
      * @param bias the given bias vector
      */
     public void setBias(Vector bias){
+        handleNull(bias, "Bias vector cannot be null");
         if(bias.getRows() != this.getOutputSize()){
             throw new IllegalArgumentException("Invalid biases length");
         }
@@ -95,6 +97,17 @@ public class Dense extends Layer {
     public Vector getBias(){
         return this.bias;
     }
+
+    /**
+     * A helper function that throws an error if the passed object is null
+     * @param obj the object to check
+     * @param msg the error message
+     */
+    private static void handleNull(Object obj, String msg){
+        if(obj == null){
+            throw new NullPointerException(msg);
+        }
+    }
     
     /**
      * The forward propagation through the layer.
@@ -102,6 +115,8 @@ public class Dense extends Layer {
      * @return the result of the forward propagation.
      */
     public Vector forwardProp(Vector input) {
+        handleNull(input, "Input cannot be null");
+
         if(input.getRows() != this.getInputSize()){
             throw new IllegalArgumentException("Invalid input dimensions");
         }
@@ -124,6 +139,8 @@ public class Dense extends Layer {
      * @return the gradient of the input with respect to the loss function.
      */
     public Vector backProp(Vector outputGrad) {
+        handleNull(outputGrad, "Output gradient cannot be null");
+
         if(outputGrad.getRows() != this.getOutputSize()){
             throw new IllegalArgumentException("Invaild output gradient dimension");
         }
