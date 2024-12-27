@@ -15,8 +15,6 @@ public class Dense extends Layer {
     private Matrix weights;
     private Vector bias;
 
-    private Vector inputVector;
-
     /**
      * Creates a dense layer with a matrix of weights initialized with He 
      * initialization and a bias vector initialized with 0's
@@ -121,7 +119,7 @@ public class Dense extends Layer {
             throw new IllegalArgumentException("Invalid input dimensions");
         }
         // Store the input vector for use in backpropagation.
-        this.inputVector = input;
+        setInputVector(input);
 
         // Compute the weighted sum (Z = W * X).
         Matrix output = Matrix.multiply(weights, input);
@@ -144,8 +142,7 @@ public class Dense extends Layer {
             throw new IllegalArgumentException("Invaild output gradient dimension");
         }
         // Compute the gradient of the weights (dW = dL/dY * X^T).
-        Matrix weightsGrad = Matrix.multiply(outputGrad, this.inputVector.T());
-        
+        Matrix weightsGrad = Matrix.multiply(outputGrad, getInputVector().T());
 
         // Scale the weights gradient by the learning rate.
         weightsGrad.scale(super.getLearningRate());

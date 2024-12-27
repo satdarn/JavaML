@@ -6,13 +6,11 @@ import matrix.Matrix;
 
 public abstract class Activation extends Layer{
 
-    private Vector inputVector;
-
     public Activation(int inputSize){
         super(inputSize, inputSize);
     }
     public Vector forwardProp(Vector input){
-        inputVector = input;
+        setInputVector(input);
         for(int index = 0; index < input.getRows(); index++){
             double value = input.get(index);
             value = activationFunc(value);
@@ -21,9 +19,9 @@ public abstract class Activation extends Layer{
         return input;
     }
     public Vector backProp(Vector outputGrad){
-        Vector inputGrad = new Vector(inputVector.getRows(), 0);
-        for(int index = 0; index < inputVector.getRows(); index++){
-            double value = inputVector.get(index);
+        Vector inputGrad = new Vector(getInputVector().getRows(), 0);
+        for(int index = 0; index < getInputVector().getRows(); index++){
+            double value = getInputVector().get(index);
             value = activationPrime(value);
             inputGrad.set(index, value);
         }
