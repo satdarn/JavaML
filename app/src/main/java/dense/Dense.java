@@ -59,7 +59,7 @@ public class Dense extends Layer {
         output = Matrix.add(output, this.bias);
 
         // Convert the result to a Vector and return it.
-        return new Vector(output.getMatrix());
+        return new Vector(output.get());
     }
 
     /**

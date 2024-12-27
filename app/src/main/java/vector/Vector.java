@@ -24,7 +24,7 @@ public class Vector extends Matrix {
         for(int i = 0; i < vector.length; i++) {
             column_vector[i][0] = vector[i];
         }
-        super.setMatrix(column_vector);
+        super.set(column_vector);
     }
 
     /**
@@ -94,8 +94,8 @@ public class Vector extends Matrix {
             throw new IllegalArgumentException(
                     "Vectors must have the same length for dot product");
         }
-        double result = dotProduct(vector1.getMatrix(), 
-            vector2.getMatrix());
+        double result = dotProduct(vector1.get(), 
+            vector2.get());
         return result;
     }
 }
