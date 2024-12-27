@@ -116,14 +116,15 @@ public class Matrix {
         return (matrix == null);
     }
 
-    /**
-     * A helper method to check if the matrix is null
-     * @param matrixA
-     * @param matrixB
-     * @return a boolean indicating if either matrix is null
-     */
-    private static boolean isNull(double[][] matrixA, double[][] matrixB){
-        return (isNull(matrixA) || isNull(matrixB));
+    private static void handleNull(Object obj, String msg){
+        if(obj == null){
+            throw new NullPointerException(msg);
+        }
+    }
+
+    private static void handleNull(Object objA, Object objB, String msg){
+        handleNull(objA, msg);
+        handleNull(objB, msg);
     }
 
     /**
@@ -137,14 +138,6 @@ public class Matrix {
                 "Invalid shapes for matrix multiplication");
         }
     } 
-    /**
-     * A helper method to check if the matrix is of the right size to multiply
-     * @param matrixA the first matrix to multiply
-     * @param matrixB the second matrix to multiply
-     */
-    private static void multiplyCheck(Matrix matrixA, Matrix matrixB){
-        multiplyCheck(matrixA.matrix, matrixB.matrix);
-    }
 
     /**
      * A helper method to check if the matrix is of the right size to add
@@ -205,10 +198,7 @@ public class Matrix {
      * @param matrix the new matrix
      */
     public void set(double[][] matrix){
-        if(isNull(matrix)){
-            throw new IllegalArgumentException(
-                    "Matrix cannot be null");
-        }
+        handleNull(matrix, "Matrix cannot null");
         this.matrix = matrix;
         this.numberOfRows = matrix.length;
         this.numberOfColumns = matrix[0].length;
@@ -289,10 +279,7 @@ public class Matrix {
      * @return the transpose of the matrix
      */
     public static double[][] transpose(double[][] matrix){
-        if(isNull(matrix)){
-            return null;
-        }
-
+        handleNull(matrix, "Matrices and cannot be null for transposition");
         // Initialize the result matrix
         double[][] result = new double[matrix[0].length][matrix.length];
         
@@ -312,6 +299,7 @@ public class Matrix {
      * @return the transpose of the matrix
      */
     public static Matrix transpose(Matrix matrix){
+        handleNull(matrix, "Matrices and cannot be null for transposition");
         double[][] result = transpose(matrix.get());
         return new Matrix(result);
     }
@@ -328,6 +316,7 @@ public class Matrix {
      */
     public static double[][] multiply(double[][] matrixA, double[][] matrixB) {
         // Check if matrices are valid for multiplication
+        handleNull(matrixA, matrixB, "Matrices cannot be null for multiplication");
         multiplyCheck(matrixA, matrixB);
 
         int rows = matrixA.length;
@@ -356,6 +345,7 @@ public class Matrix {
      * @return the product of both matrices as a Matrix object
      */
     public static Matrix multiply(Matrix matrixA, Matrix matrixB) {
+        handleNull(matrixA, matrixB, "Matrices cannot be null for multiplication");
         double[][] result = multiply(matrixA.get(), matrixB.get());
         return new Matrix(result);
     }
@@ -367,11 +357,7 @@ public class Matrix {
      * @return the sum of the matrices
      */
     public static double[][] add(double[][] matrixA, double[][] matrixB){
-        // Return null if both matrices are null
-        if(isNull(matrixA, matrixB)){
-            return null;
-        }
-    
+        handleNull(matrixA, matrixB, "Matrices cannot be null for addition");
         // Check the size of the matrices and make sure they are the same size
         addCheck(matrixA, matrixB);
         
@@ -395,7 +381,7 @@ public class Matrix {
      * @return the sum of the matrices
      */
     public static Matrix add(Matrix matrixA, Matrix matrixB){
-
+        handleNull(matrixA, matrixB, "Matrices cannot be null for addition");
         // Check the size of the matrices and make sure they are the same size
         addCheck(matrixA, matrixB);
 
@@ -411,10 +397,7 @@ public class Matrix {
      * @return the diffence between the first and second matrix
      */
     public static double[][] subtract(double[][] matrixA, double[][] matrixB){
-        // Return null if both matrices are null
-        if(isNull(matrixA, matrixB)){
-            return null;
-        }
+        handleNull(matrixA, matrixB, "Matrices cannot be null for subtraction");
 
         // Check the size of the matrices and make sure they are the same size
         addCheck(matrixA, matrixB);
@@ -435,7 +418,7 @@ public class Matrix {
      * @return the diffence between the first and second matrix
      */
     public static Matrix subtract(Matrix matrixA, Matrix matrixB){
-
+        handleNull(matrixA, matrixB, "Matrices cannot be null for subtraction");
         // Check the size of the matrix and make sure theh are of the same size
         addCheck(matrixA, matrixB);
         
@@ -444,9 +427,7 @@ public class Matrix {
     }
 
     public static double[][] scale(double[][] matrix, double scaler){
-        if(isNull(matrix)){
-            return null;
-        }
+        handleNull(matrix, "Matrix cannot be null for scaling");
         double[][] result = new double[matrix.length][matrix[0].length];
         for(int i = 0; i < matrix.length; i++){
             for(int j = 0; j < matrix[0].length; j++){
@@ -463,9 +444,7 @@ public class Matrix {
      * @return scaled matrix
      */
     public static Matrix scale(Matrix matrix, double scaler){
-        if(isNull(matrix.get())){
-            return null;
-        }
+        handleNull(matrix, "Matrix cannot be null for scaling");
         double[][] result = scale(matrix.get(), scaler);
         return new Matrix(result);
     }
@@ -487,6 +466,7 @@ public class Matrix {
      * @return the cross correlated matrix of the kernel and given matrix
      */
     public static double[][] convolution(double[][] matrix, double[][] kernel) {
+        handleNull(matrix, kernel, "Matrices and kernel cannot be null for convolution");
         int matrixRows = matrix.length; // number of rows in matrix
         int matrixColumns = matrix[0].length; // number of columns in matrix
     
@@ -532,15 +512,18 @@ public class Matrix {
      * @return the cross correlated matrix of the kernel and given matrix
      */
     public static Matrix convolution(Matrix matrix, Matrix kernel){
+        handleNull(matrix, kernel, "Matrices and kernel cannot be null for convolution");
         return new Matrix(
             convolution(matrix.get(), kernel.get()));
     }
 
     public double[][] convolution(double[][] kernal){
+        handleNull(kernal, "Matrices and kernel cannot be null for convolution");
         return convolution(this.matrix, kernal);
     }
 
     public Matrix convolution(Matrix kernal){
+        handleNull(kernal, "Matrices and kernel cannot be null for convolution");
         return new Matrix(convolution(this.matrix, kernal.get()));
     }
 }
