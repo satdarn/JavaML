@@ -12,7 +12,7 @@ public class ReLu extends Activation {
         return input * leakySlope;
     }
     public double activationPrime(double outputGrad){
-        if(outputGrad >= 0){
+        if(outputGrad > 0){
             return 1;
         }
         return leakySlope;
