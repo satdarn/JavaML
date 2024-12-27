@@ -27,6 +27,11 @@ public class Dense extends Layer {
         this.bias = new Vector(outputSize);
     }
 
+    public Dense(int inputSize, int outputSize, Matrix weights, Vector bias){
+        super(inputSize, outputSize);
+        this.setWeights(weights);
+        this.setBias(bias);
+    }
     public void setWeights(Matrix weights) {
         if(weights.getRows() != this.getOutputSize() || 
             weights.getColumns() != this.getInputSize()){
