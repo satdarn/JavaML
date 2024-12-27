@@ -1,4 +1,5 @@
-package src;
+package layer.activation;
+
 public class ReLu extends Activation {
     private static double leakySlope = 0.5;
     public ReLu(int inputSize){
