@@ -7,6 +7,18 @@ import static org.junit.jupiter.api.Assertions.*;
 import matrix.Matrix;
 
 public class MuliplicationTest {
+    public static void assertMatrixEquals(double[][] expected, double[][] actual, double epsilon) {
+        assertNotNull(expected, "Expected matrix is null");
+        assertNotNull(actual, "Actual matrix is null");
+        assertEquals(expected.length, actual.length, "Matrix row counts differ");
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(expected[i].length, actual[i].length, "Matrix column counts differ in row " + i);
+            for (int j = 0; j < expected[i].length; j++) {
+                assertEquals(expected[i][j], actual[i][j], epsilon, 
+                    String.format("Values differ at position [%d][%d]: expected %f, but got %f", i, j, expected[i][j], actual[i][j]));
+            }
+        }
+    }
     // Test for multiplying two matrices with raw 2D arrays
     @Test
     public void testMultiplyMatrixArray() {
@@ -25,7 +37,7 @@ public class MuliplicationTest {
 
         double[][] result = Matrix.multiply(matrixA, matrixB);
 
-        assertArrayEquals(expected, result, "Matrix multiplication with raw 2D arrays failed");
+        assertMatrixEquals(expected, result, 1e-9);
     }
 
     // Test for multiplying two Matrix objects
@@ -46,7 +58,7 @@ public class MuliplicationTest {
 
         Matrix result = Matrix.multiply(matrixA, matrixB);
 
-        assertArrayEquals(expected.get(), result.get(), "Matrix multiplication with Matrix objects failed");
+        assertMatrixEquals(expected.get(), result.get(), 1e-9);
     }
 
     // Test for multiplying incompatible matrices (should throw an exception)
@@ -65,5 +77,98 @@ public class MuliplicationTest {
         assertThrows(IllegalArgumentException.class, () -> {
             Matrix.multiply(matrixA, matrixB);
         }, "Matrix multiplication should fail for incompatible matrices");
+    }
+    @Test
+    public void testElementWiseMultiply_ValidMatrices() {
+        double[][] matrix1 = {
+            {1.0, 2.0},
+            {3.0, 4.0}
+        };
+
+        double[][] matrix2 = {
+            {5.0, 6.0},
+            {7.0, 8.0}
+        };
+
+        Matrix mat1 = new Matrix(matrix1);
+        Matrix mat2 = new Matrix(matrix2);
+
+        Matrix result = Matrix.elementWiseMultiply(mat1, mat2);
+
+        double[][] expected = {
+            {5.0, 12.0},
+            {21.0, 32.0}
+        };
+
+        assertMatrixEquals(expected, result.get(), 1e-9);
+    }
+
+    @Test
+    public void testElementWiseMultiply_MatricesWithDifferentDimensions() {
+        double[][] matrix1 = {
+            {1.0, 2.0},
+            {3.0, 4.0}
+        };
+
+        double[][] matrix2 = {
+            {5.0, 6.0}
+        };
+
+        Matrix mat1 = new Matrix(matrix1);
+        Matrix mat2 = new Matrix(matrix2);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Matrix.elementWiseMultiply(mat1, mat2);
+        }, "Matrices must have the same dimensions for element-wise multiplication.");
+    }
+
+    @Test
+    public void testElementWiseMultiply_ZeroMatrix() {
+        double[][] matrix1 = {
+            {0.0, 2.0},
+            {3.0, 4.0}
+        };
+
+        double[][] matrix2 = {
+            {5.0, 6.0},
+            {7.0, 8.0}
+        };
+
+        Matrix mat1 = new Matrix(matrix1);
+        Matrix mat2 = new Matrix(matrix2);
+
+        Matrix result = Matrix.elementWiseMultiply(mat1, mat2);
+
+        double[][] expected = {
+            {0.0, 12.0},
+            {21.0, 32.0}
+        };
+
+        assertMatrixEquals(expected, result.get(), 1e-9);
+    }
+
+    @Test
+    public void testElementWiseMultiply_IdentityMatrix() {
+        double[][] matrix1 = {
+            {1.0, 1.0},
+            {1.0, 1.0}
+        };
+
+        double[][] matrix2 = {
+            {2.0, 3.0},
+            {4.0, 5.0}
+        };
+
+        Matrix mat1 = new Matrix(matrix1);
+        Matrix mat2 = new Matrix(matrix2);
+
+        Matrix result = Matrix.elementWiseMultiply(mat1, mat2);
+
+        double[][] expected = {
+            {2.0, 3.0},
+            {4.0, 5.0}
+        };
+
+        assertMatrixEquals(expected, result.get(), 1e-9);
     }
 }

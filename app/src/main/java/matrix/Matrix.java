@@ -123,7 +123,9 @@ public class Matrix {
     private static void multiplyCheck(double[][] matrixA, double[][] matrixB){
         if((matrixA[0].length != matrixB.length)) {
             throw new IllegalArgumentException(
-                "Invalid shapes for matrix multiplication");
+                "Invalid shapes for matrix multiplication. Cannot multiply matrix of shape: " + 
+                matrixA.length + "x" + matrixA[0].length + " with matrix of shape: " +
+                matrixB.length + "x" + matrixB[0].length);
         }
     } 
 
@@ -237,15 +239,16 @@ public class Matrix {
      * @return the value at the index
      */
     public double get(int row, int column){
-        if((row >= 0 && row < this.numberOfRows) && 
-                (column >= 0 && column < this.numberOfColumns)){
-            return this.matrix[row][column];
-
-        } 
-        else {
+        if(!(row >= 0 && row < this.numberOfRows)){
             throw new IllegalArgumentException(
-                    "Invalid row or column index");
-        } 
+                    "Invalid row index");
+        }
+        if(!(column >= 0 && column < this.numberOfColumns)){
+            throw new IllegalArgumentException(
+                    "Invalid column index");
+        }
+        return this.matrix[row][column];
+
     }
 
     /**
@@ -341,6 +344,33 @@ public class Matrix {
         double[][] result = multiply(matrixA.get(), matrixB.get());
         return new Matrix(result);
     }
+
+    public static double[][] elementWiseMultiply(double[][] matrix1, double[][] matrix2) {
+        // Check if both matrices have the same dimensions
+        if (matrix1.length != matrix2.length || matrix1[0].length != matrix2[0].length) {
+            throw new IllegalArgumentException("Matrices must have the same dimensions for element wise multiplication.");
+        }
+
+        // Get the dimensions of the matrices
+        int rows = matrix1.length;
+        int cols = matrix1[0].length;
+
+        // Create a result matrix
+        double[][] result = new double[rows][cols];
+
+        // Perform element-wise multiplication
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result[i][j] = matrix1[i][j] * matrix2[i][j];
+            }
+        }
+
+        return result;
+    }
+    public static Matrix elementWiseMultiply(Matrix matrix1, Matrix matrix2){
+        return new Matrix(elementWiseMultiply(matrix1.get(), matrix2.get()));
+    }
+    
 
     /**
      * Adds two matrices and finds the sum
