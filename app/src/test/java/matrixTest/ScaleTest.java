@@ -56,9 +56,9 @@ public class ScaleTest {
             {9, 12}
         });
 
-        Matrix result = matrix.scale(scaler);
+        matrix.scale(scaler);
 
-        assertArrayEquals(expected.get(), result.get(), "Instance scaling with Matrix object failed");
+        assertArrayEquals(expected.get(), matrix.get(), "Instance scaling with Matrix object failed");
     }
 
     // Test for scaling with a scalar of 0 (should result in a matrix of zeros)
@@ -101,9 +101,9 @@ public class ScaleTest {
             {0, 0}
         });
 
-        Matrix result = matrix.scale(scaler);
+       matrix.scale(scaler);
 
-        assertArrayEquals(expected.get(), result.get(), "Scaling a Matrix object by 0 failed");
+        assertArrayEquals(expected.get(), matrix.get(), "Scaling a Matrix object by 0 failed");
     }
 
     // Test for scaling a Matrix with a negative scalar
@@ -119,8 +119,8 @@ public class ScaleTest {
             {-6, -8}
         });
 
-        Matrix result = matrix.scale(scaler);
+        matrix.scale(scaler);
 
-        assertArrayEquals(expected.get(), result.get(), "Scaling a Matrix object with a negative scalar failed");
+        assertArrayEquals(expected.get(), matrix.get(), "Scaling a Matrix object with a negative scalar failed");
     }
 }

@@ -444,10 +444,9 @@ public class Matrix {
     /**
      * Scales the matrix by a given scaler
      * @param scaler the scaling value
-     * @return scaled matrix
      */
-    public Matrix scale(double scaler){
-        return new Matrix(scale(this.matrix, scaler));
+    public void scale(double scaler){
+        this.matrix = scale(this.matrix, scaler);
     }
 
     /**
