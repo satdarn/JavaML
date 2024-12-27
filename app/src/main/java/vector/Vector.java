@@ -62,6 +62,18 @@ public class Vector extends Matrix {
     public void set(int row, double value){
         this.set(row, 1, value);
     }
+    /**
+     * Returns if every entry in the vector has a value of zero
+     * @return true if every entry in the vector has a value of zero
+     */
+    public boolean isZeroVector(){
+        for(double value : this.get()[0]){
+            if(value!= 0){
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * Calculates the dot product of two given vectors as the sum of the product
