@@ -111,4 +111,73 @@ public class ForwardPropTest {
             denseLayer.forwardProp(inputVector);
         });
     }
+
+    @Test
+    public void testForwardPropZeroWeightsBiases() {
+        int inputSize = 2;
+        int outputSize = 3;
+
+        double[][] weightArray = {
+            {0.0, 0.0},
+            {0.0, 0.0},
+            {0.0, 0.0}
+        };
+        double[] biasArray = {0.0, 0.0, 0.0};
+
+        Matrix weights = new Matrix(weightArray);
+        Vector biases = new Vector(biasArray);
+
+        Dense denseLayer = new Dense(inputSize, outputSize, weights, biases);
+
+        double[][] inputArray = {
+            {0.5},
+            {0.6}
+        };
+
+        Vector inputVector = new Vector(inputArray);
+
+        // Expected output should be all biases because weights are zero
+        double[][] expectedOutput = {
+            {0.0},
+            {0.0},
+            {0.0}
+        };
+        Vector expectedVector = new Vector(expectedOutput);
+
+        Vector outputVector = denseLayer.forwardProp(inputVector);
+
+        assertMatrixEquals(expectedVector.get(), outputVector.get(), 1e-9);
+    }
+
+    @Test
+    public void testForwardPropLargeInput() {
+        int inputSize = 1000; // Large input size
+        int outputSize = 1000; // Large output size
+
+        double[][] weightArray = new double[outputSize][inputSize];
+        double[] biasArray = new double[outputSize];
+
+        // Fill weights and biases with some values
+        for (int i = 0; i < outputSize; i++) {
+            for (int j = 0; j < inputSize; j++) {
+                weightArray[i][j] = Math.random();
+            }
+            biasArray[i] = Math.random();
+        }
+
+        Matrix weights = new Matrix(weightArray);
+        Vector biases = new Vector(biasArray);
+
+        double[][] inputArray = new double[inputSize][1];
+        for (int i = 0; i < inputSize; i++) {
+            inputArray[i][0] = Math.random();
+        }
+
+        Dense denseLayer = new Dense(inputSize, outputSize, weights, biases);
+        Vector inputVector = new Vector(inputArray);
+
+        Vector outputVector = denseLayer.forwardProp(inputVector);
+
+        assertNotNull(outputVector);
+    }
 }
