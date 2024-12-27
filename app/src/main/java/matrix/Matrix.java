@@ -187,6 +187,10 @@ public class Matrix {
      */
     public void set(double[][] matrix){
         handleNull(matrix, "Matrix cannot null");
+        if(matrix.length == 0){
+            throw new IllegalArgumentException(
+                    "Matrix rows or columns cannot be of size 0");
+        }
         this.matrix = matrix;
         this.numberOfRows = matrix.length;
         this.numberOfColumns = matrix[0].length;
