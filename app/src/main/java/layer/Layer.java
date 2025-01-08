@@ -16,14 +16,6 @@ public abstract class Layer{
     private static double learningRate;
 
     /**
-     * Creates a layer with no input nodes and no output nodes
-     */
-    public Layer(){
-        this.inputSize = 0;
-        this.outputSize = 0;
-    }
-
-    /**
      * Creates a layer with a given input size and given output size
      * @param inputSize number of input nodes
      * @param outputSize number of output nodes
