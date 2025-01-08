@@ -3,34 +3,27 @@ package loss;
 import matrix.Vector;
 
 public class CatCross implements Loss {
-    @Override
-    public Vector loss(Vector predicted, Vector actual) {
-        Vector output = new Vector(actual.getRows(), 0);
-        for (int i = 0; i < actual.getRows(); i++) {
-            double out = -actual.get(i) * Math.log(predicted.get(i)); // Applying the cross-entropy formula
-            output.set(i, out);
+
+    private void checkVec(Vector vect1, Vector vect2) {
+        if(vect1.getRows() != vect2.getRows()){
+            throw new IllegalArgumentException("Both vectors must have the same length.");
         }
-        return output;
+    }
+    @Override
+    public double loss(Vector predicted, Vector actual) {
+        checkVec(predicted, actual);
+        double sum = 0;
+        for(int i = 0; i < predicted.getRows(); i ++){
+            sum += (actual.get(i)) * Math.log(actual.get(i));
+        }   
+        return -sum;     
     }
 
     @Override
     public Vector lossPrime(Vector predicted, Vector actual) {
+        checkVec(predicted, actual);
         Vector output = new Vector(actual.getRows(), 0);
-        for (int i = 0; i < actual.getRows(); i++) {
-            // Derivative of categorical cross-entropy: p - y
-            double out = predicted.get(i) - actual.get(i);
-            output.set(i, out);
-        }
         return output;
     }
 
-    @Override
-    public double loss(double predicted, double actual) {
-        return -actual * Math.log(predicted); // Cross-entropy for a single prediction
-    }
-
-    @Override
-    public double lossPrime(double predicted, double actual) {
-        return predicted - actual; // Derivative for a single prediction
-    }
 }
